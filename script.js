@@ -12,6 +12,11 @@ const menuButton = document.querySelector('[data-menu-button]');
 const nav = document.querySelector('[data-nav]');
 const footerLinks = document.querySelector('.footer-links');
 
+if (menuButton && nav) {
+  nav.id ||= 'main-navigation';
+  menuButton.setAttribute('aria-controls', nav.id);
+}
+
 if (footerLinks) {
   const socialNetworks = [
     {
@@ -99,20 +104,41 @@ const syncHeader = () => header.classList.toggle('scrolled', window.scrollY > 24
 syncHeader();
 window.addEventListener('scroll', syncHeader, { passive: true });
 
-menuButton.addEventListener('click', () => {
-  const open = menuButton.getAttribute('aria-expanded') !== 'true';
-  menuButton.setAttribute('aria-expanded', String(open));
-  menuButton.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-  nav.classList.toggle('open', open);
-  document.body.classList.toggle('menu-open', open);
-});
-
-nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+const closeMenu = ({ restoreFocus = false } = {}) => {
+  if (!menuButton || !nav) return;
   menuButton.setAttribute('aria-expanded', 'false');
   menuButton.setAttribute('aria-label', 'Abrir menú');
   nav.classList.remove('open');
   document.body.classList.remove('menu-open');
-}));
+  if (window.matchMedia('(max-width: 980px)').matches) nav.inert = true;
+  if (restoreFocus) menuButton.focus();
+};
+
+const syncMobileMenu = () => {
+  if (!menuButton || !nav) return;
+  const mobile = window.matchMedia('(max-width: 980px)').matches;
+  if (!mobile) closeMenu();
+  nav.inert = mobile && !nav.classList.contains('open');
+};
+
+menuButton?.addEventListener('click', () => {
+  const open = menuButton.getAttribute('aria-expanded') !== 'true';
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  nav.classList.toggle('open', open);
+  nav.inert = !open;
+  document.body.classList.toggle('menu-open', open);
+  if (open) nav.querySelector('a')?.focus();
+});
+
+nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMenu()));
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && nav?.classList.contains('open')) closeMenu({ restoreFocus: true });
+});
+
+window.addEventListener('resize', syncMobileMenu, { passive: true });
+syncMobileMenu();
 
 const chapterButtons = [...document.querySelectorAll('[data-chapter-button]')];
 const chapterPanels = [...document.querySelectorAll('[data-chapter-panel]')];
