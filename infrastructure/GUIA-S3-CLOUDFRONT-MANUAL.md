@@ -93,9 +93,13 @@ async function handler(event) {
 }
 ```
 
-5. Guarda, prueba y elige **Publish**.
-6. En **Associate**, selecciona la distribución nueva, evento **Viewer request** y comportamiento `Default (*)`.
-7. Espera a que la distribución termine de desplegar.
+5. Guarda, prueba y elige **Publish function**. La función debe quedar en la etapa **LIVE**.
+6. Ignora **Associated KeyValueStore**; el sitio no utiliza un KeyValueStore.
+7. Vuelve a **CloudFront → Distributions** y abre la distribución nueva.
+8. Abre **Behaviors**, selecciona `Default (*)` y elige **Edit**.
+9. En **Function associations**, busca **Viewer request** y selecciona `alvartorres-clean-urls` como CloudFront Function.
+10. Deja **Viewer response** sin asociación y guarda los cambios.
+11. Espera a que la distribución termine de desplegar.
 
 ## 7. Probar antes de conectar el dominio
 
