@@ -22,3 +22,6 @@ servidor HTTP estático.
 
 El repositorio incluye `amplify.yml` para AWS Amplify Hosting. Al conectar la rama
 principal, Amplify publica directamente los archivos estáticos del repositorio.
+
+También incluye `infrastructure/cloudformation.yml` para crear una arquitectura
+alternativa con S3 privado, CloudFront, certificado ACM y registros de Route 53.
