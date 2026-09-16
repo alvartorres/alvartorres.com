@@ -1,3 +1,12 @@
+const scriptSource = document.currentScript?.src;
+if (scriptSource && !document.querySelector('link[rel="icon"]')) {
+  const favicon = document.createElement('link');
+  favicon.rel = 'icon';
+  favicon.type = 'image/svg+xml';
+  favicon.href = new URL('favicon.svg', scriptSource).href;
+  document.head.append(favicon);
+}
+
 const header = document.querySelector('[data-header]');
 const menuButton = document.querySelector('[data-menu-button]');
 const nav = document.querySelector('[data-nav]');
