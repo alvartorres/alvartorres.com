@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Private S3 origin for alvartorres.com. CloudFront and DNS are configured separately.
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: alvartorres.com
+    Description: Project tag applied to the bucket.
+
+Resources:
+  SiteBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Purpose
+          Value: CloudFront private origin
+
+Outputs:
+  BucketName:
+    Description: Upload the contents of the para s3 folder to this bucket.
+    Value: !Ref SiteBucket
+  BucketArn:
+    Description: ARN used if the CloudFront console asks for an S3 bucket policy.
+    Value: !GetAtt SiteBucket.Arn
+  BucketRegionalDomainName:
+    Description: Select this regular S3 endpoint as the CloudFront origin, not a website endpoint.
+    Value: !GetAtt SiteBucket.RegionalDomainName
