@@ -17,27 +17,33 @@ if (footerLinks) {
     {
       name: 'Instagram',
       slug: 'instagram',
+      url: 'https://www.instagram.com/alvar_torres_ok/',
       icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle class="icon-fill" cx="17.4" cy="6.7" r="1.1"/></svg>',
     },
     {
       name: 'Facebook',
       slug: 'facebook',
+      url: 'https://www.facebook.com/profile.php?id=61587842156510',
       icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="icon-fill" d="M14.2 8.2V6.7c0-.7.5-.9 1-.9h2.7V2.1L14.7 2C11.5 2 9.9 3.9 9.9 6.4v1.8H7v4.1h2.9V22h4.3v-9.7h3.3l.6-4.1h-3.9Z"/></svg>',
     },
     {
-      name: 'LinkedIn',
-      slug: 'linkedin',
-      icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect class="icon-fill" x="3" y="9" width="4" height="12"/><circle class="icon-fill" cx="5" cy="5" r="2.2"/><path class="icon-fill" d="M10 9h4v1.7c.9-1.3 2.2-2.1 4-2.1 3.2 0 4 2.3 4 5.6V21h-4.1v-6.1c0-1.5-.3-2.7-1.9-2.7-1.7 0-2 1.4-2 2.7V21h-4V9Z"/></svg>',
+      name: 'Linktree',
+      slug: 'linktree',
+      url: 'https://linktr.ee/alvartorres',
+      icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22V8M12 8 5 15M12 8l7 7M12 8H3M12 8h9M12 8 7 3M12 8l5-5"/></svg>',
     },
   ];
   footerLinks.replaceChildren();
   footerLinks.setAttribute('aria-label', 'Redes sociales');
-  socialNetworks.forEach(({ name, slug, icon }) => {
-    const placeholder = document.createElement('span');
-    placeholder.className = `social-placeholder social-${slug}`;
-    placeholder.innerHTML = `${icon}<span>${name}</span>`;
-    placeholder.title = 'Enlace por confirmar';
-    footerLinks.append(placeholder);
+  socialNetworks.forEach(({ name, slug, url, icon }) => {
+    const link = document.createElement('a');
+    link.className = `social-link social-${slug}`;
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', `${name} de Alvar Torres (abre en una pestaña nueva)`);
+    link.innerHTML = `${icon}<span>${name}</span>`;
+    footerLinks.append(link);
   });
 }
 

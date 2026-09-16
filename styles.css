@@ -227,13 +227,14 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -.045em; }
 .site-footer { display: grid; grid-template-columns: 1fr auto 1fr; gap: 30px; align-items: center; padding: 44px clamp(22px, 6vw, 92px); color: var(--white); background: #061226; border-top: 1px solid rgba(255,255,255,.1); }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; color: var(--white); font-size: 15px; }
 .footer-links a { text-decoration: none; }
-.footer-links .social-placeholder { display: inline-flex; align-items: center; gap: 11px; min-width: 150px; padding: 13px 17px; border: 1px solid rgba(255,255,255,.16); font-weight: 700; cursor: default; transition: transform .2s, filter .2s; }
-.footer-links .social-placeholder:hover { transform: translateY(-2px); filter: brightness(1.12); }
-.social-placeholder svg { width: 24px; height: 24px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; }
-.social-placeholder .icon-fill { fill: currentColor; stroke: none; }
+.footer-links .social-link { display: inline-flex; align-items: center; gap: 11px; min-width: 150px; padding: 13px 17px; border: 1px solid rgba(255,255,255,.16); font-weight: 700; transition: transform .2s, filter .2s, box-shadow .2s; }
+.footer-links .social-link:hover { transform: translateY(-2px); filter: brightness(1.12); box-shadow: 0 8px 22px rgba(0,0,0,.18); }
+.footer-links .social-link:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+.social-link svg { width: 24px; height: 24px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.social-link .icon-fill { fill: currentColor; stroke: none; }
 .social-instagram { color: #fff; background: linear-gradient(125deg, #6d38d8, #cf3e91 55%, #ed8b35); }
 .social-facebook { color: #fff; background: #1877f2; }
-.social-linkedin { color: #fff; background: #0a66c2; }
+.social-linktree { color: #091a34; background: #43e660; }
 .footer-meta { display: flex; justify-content: flex-end; gap: 20px; color: #8d9db5; font: 500 11px var(--mono); text-transform: uppercase; }
 
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
