@@ -52,6 +52,19 @@ if (footerLinks) {
   });
 }
 
+// Cada página interna ofrece una salida visible sin depender del menú ni del
+// botón "atrás" del navegador.
+const internalMain = document.querySelector('main:not(#contenido)');
+if (internalMain) {
+  internalMain.classList.add('has-page-back');
+  const backLink = document.createElement('a');
+  backLink.className = 'page-back';
+  backLink.href = '../';
+  backLink.setAttribute('aria-label', 'Volver a la página de inicio');
+  backLink.innerHTML = '<span aria-hidden="true">←</span> Volver al inicio';
+  internalMain.prepend(backLink);
+}
+
 // Los servidores resuelven /bio/ como /bio/index.html. Al abrir el sitio
 // directamente desde una carpeta local, hacemos esa resolución explícita.
 if (window.location.protocol === 'file:') {

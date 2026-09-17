@@ -88,6 +88,14 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -.045em; }
 .home-route b { font-size: 12px; }
 
 .inner-page { min-height: 100svh; padding-top: 92px; background: var(--paper); }
+.has-page-back { padding-top: 92px; }
+.page-back { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin: 28px clamp(22px, 6vw, 92px) 0; padding: 10px 16px; color: var(--white); background: var(--ink); border: 1px solid var(--ink); font: 700 12px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; text-decoration: none; transition: color .2s, background .2s, border-color .2s, transform .2s; }
+.page-back span { font: 400 21px/1 Arial, sans-serif; transition: transform .2s; }
+.page-back:hover, .page-back:focus-visible { color: var(--ink); background: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+.page-back:hover span, .page-back:focus-visible span { transform: translateX(-3px); }
+.page-back + .page-hero { padding-top: clamp(38px, 5vw, 70px); }
+.page-back + .bio-page { padding-top: clamp(38px, 5vw, 70px); }
+.page-back + .support-page { min-height: calc(100svh - 92px - 72px); padding-top: clamp(44px, 6vw, 85px); }
 .page-hero { display: grid; grid-template-columns: .37fr 1fr; gap: 6vw; padding: clamp(75px, 9vw, 135px) clamp(22px, 6vw, 92px) clamp(60px, 7vw, 100px); border-bottom: 1px solid var(--line); }
 .page-kicker { color: #88744b; font: 600 12px var(--mono); text-transform: uppercase; letter-spacing: .11em; }
 .page-hero h1 { max-width: 1050px; margin: 0 0 30px; font-size: clamp(48px, 6.5vw, 100px); line-height: .98; }
@@ -276,6 +284,7 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -.045em; }
 @media (max-width: 720px) {
   html { scroll-padding-top: 70px; }
   .inner-page { padding-top: 72px; }
+  .has-page-back { padding-top: 72px; }
   .hero { min-height: auto; grid-template-columns: 1fr; padding: 116px 22px 0; }
   .hero-copy { padding: 0 0 48px; }
   .hero h1 { font-size: clamp(43px, 13.5vw, 65px); }
@@ -332,6 +341,10 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -.045em; }
   .menu-button span { left: 8px; }
   .main-nav { justify-content: flex-start; gap: 20px; padding-top: max(104px, calc(env(safe-area-inset-top) + 76px)); padding-right: max(22px, env(safe-area-inset-right)); padding-left: max(22px, env(safe-area-inset-left)); font-size: clamp(23px, 7.4vw, 28px); }
   .inner-page { padding-top: 68px; }
+  .has-page-back { padding-top: 68px; }
+  .page-back { width: calc(100% - 36px); justify-content: center; margin: 18px 18px 0; font-size: 12px; }
+  .page-back + .page-hero, .page-back + .bio-page { padding-top: 34px; }
+  .page-back + .support-page { min-height: auto; padding-top: 42px; }
   .hero { padding: 104px 18px 0; }
   .hero-copy { padding-bottom: 38px; }
   .hero h1 { font-size: clamp(36px, 11.5vw, 48px); line-height: 1.04; }
